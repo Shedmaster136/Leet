@@ -1,5 +1,5 @@
 import random
-def initarrayunique() -> tuple[int]:
+def initarrayunique() -> list[int]:
     range_from = 0
     range_to = 0
     init_arr = []
@@ -15,7 +15,7 @@ def initarrayunique() -> tuple[int]:
         exit()
     if range_to - range_from < range_len :
         print('Not enough values to fill the range')
-    init_arr = random.sample(range(range_from, range_to), range_len) 
+    init_arr = random.sample(range(range_from, range_to), range_len)
     return init_arr
 
 
@@ -23,15 +23,10 @@ if __name__ == '__main__':
     nums = initarrayunique()
     print(nums)
     target = int(input())
-    result_arr = []
-    for i in range(len(nums)-1):
-        for j in range(i+1, len(nums)):
-            if (nums[i]+nums[j] == target):
-                result_arr.append(i)
-                result_arr.append(j)
-                break
-        if result_arr != []: break
-    if result_arr == []:
-        print('Cannot find two numbers')
-    else:
-        print(result_arr)
+    hashmap = {}
+    for i, num in enumerate(nums):
+        if (target - num in hashmap):
+            print(hashmap[target-num], i)
+        else:
+            hashmap[num] = i
+
